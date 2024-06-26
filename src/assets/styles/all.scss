@@ -1,0 +1,10 @@
+@import 'bootstrap/scss/bootstrap';
+//自己的＿variables.scss要先放在bs的前面 因為都是default這樣就可以蓋掉後面的bs default
+@import './variables';
+// bs ＿variables.scss default要放在自己的＿variables.scss後面
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/bootstrap';
+
+@import './reset';
+@import './base';
+@import './util';
