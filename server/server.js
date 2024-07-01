@@ -10,16 +10,22 @@ const cors = require('cors');
 const connectDB = require('./connectMongo');
 connectDB();
 //test model with mongodb
-const User = require('./models/userModel');
+const UserModel = require('./models/userModel');
 //use create
-User.create({ name: 'test8', phone: 823456789 })
-  .then(() => {
-    console.log('done');
-  })
-  .catch((error) => {
-    console.log(error);
-  });
-
+// UserModel.create({ name: 'test8', phone: 823456789 })
+//   .then(() => {
+//     console.log('done');
+//   })
+//   .catch((error) => {
+//     console.log(error);
+//   });
+//test PostModel
+const PostModel = require('./models/postModel');
+const init = async () => {
+  const AllPosts = await PostModel.find();
+  console.log('All Posts:', AllPosts);
+};
+init();
 // const swaggerUi = require('swagger-ui-express');
 // const swaggerDocument = require('./swagger-output.json');
 //捕捉程式重大錯誤 這個要放最前面
@@ -59,7 +65,15 @@ app.use((req, res, next) => {
 // 将用户路由挂载到 /api/users 路径下
 // app.use('/api/users');
 // app.use('/api/users/member', usersMemberRoutes);
-
+app.get('/', (req, res) => {
+  res.status(200).json({
+    message: 'Welcome to socialPlatform API',
+  });
+});
+app.get('/s/:postContent', (req, res) => {
+  console.log(req.params);
+  res.status(200).json({ name: 'test' });
+});
 // 404 找不到頁面 錯誤處理程序
 app.use((req, res, next) => {
   res.status(404).send("Sorry can't find that! 404 错误处理程序");

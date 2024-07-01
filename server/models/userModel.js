@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema(
 
 //test add model to collection
 //若是要編輯options則要用mongoose.model()
-const User = mongoose.model('User', userSchema);
+const UserModel = mongoose.model('User', userSchema);
 
 //model
-module.exports = User;
+module.exports = UserModel;
