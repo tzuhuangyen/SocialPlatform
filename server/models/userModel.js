@@ -1,0 +1,26 @@
+const mongoose = require('mongoose');
+// schema
+const userSchema = new mongoose.Schema(
+  {
+    name: { type: String, required: [true, 'must be'] },
+    phone: Number,
+    createdAt: {
+      type: Date,
+      default: Date.now,
+      select: false, //不要顯示給前台用戶
+    },
+    updatedAt: {
+      type: Date,
+      default: Date.now,
+    },
+  },
+
+  { versionKey: false }
+);
+
+//test add model to collection
+//若是要編輯options則要用mongoose.model()
+const User = mongoose.model('User', userSchema);
+
+//model
+module.exports = User;

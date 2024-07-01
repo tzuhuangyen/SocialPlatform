@@ -1,14 +1,25 @@
 const dotenv = require('dotenv');
-require('dotenv').config();
 dotenv.config({ path: './config.env' });
+console.log(process.env);
 console.log(process.env.MONGODB_CONNECT_URL);
 const express = require('express');
 const app = express();
 const path = require('path');
-
 const cors = require('cors');
-// const connectDB = require('./connectMongo');
-// connectDB();
+
+const connectDB = require('./connectMongo');
+connectDB();
+//test model with mongodb
+const User = require('./models/userModel');
+//use create
+User.create({ name: 'test8', phone: 823456789 })
+  .then(() => {
+    console.log('done');
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+
 // const swaggerUi = require('swagger-ui-express');
 // const swaggerDocument = require('./swagger-output.json');
 //捕捉程式重大錯誤 這個要放最前面
@@ -46,7 +57,7 @@ app.use((req, res, next) => {
 // The function is expected to return a JSON response.
 
 // 将用户路由挂载到 /api/users 路径下
-// app.use('/api/users', usersRoutes);
+// app.use('/api/users');
 // app.use('/api/users/member', usersMemberRoutes);
 
 // 404 找不到頁面 錯誤處理程序
@@ -67,5 +78,13 @@ process.on('unhandleRejection', (err, promise) => {
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
-  console.log(`Yen's Server Started at Server is running on ${PORT}`);
+  console.log(`socialPlatform's Server Started at  ${PORT}`);
 });
+
+//test mongodb connect
+// const requestListener = (req, res) => {
+//   console.log(req.url);
+//   res.end();
+// };
+// const server = http.createServer(requestListener);
+// server.listen(8080);
