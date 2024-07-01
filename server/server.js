@@ -1,7 +1,7 @@
 const dotenv = require('dotenv');
 dotenv.config({ path: './config.env' });
-console.log(process.env);
-console.log(process.env.MONGODB_CONNECT_URL);
+// console.log(process.env);
+// console.log(process.env.MONGODB_CONNECT_URL);
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -9,6 +9,9 @@ const cors = require('cors');
 
 const connectDB = require('./connectMongo');
 connectDB();
+
+const userRoutes = require('./routes/userRoutes');
+const postRoutes = require('./routes/postRoutes');
 //test model with mongodb
 const UserModel = require('./models/userModel');
 //use create
@@ -19,13 +22,7 @@ const UserModel = require('./models/userModel');
 //   .catch((error) => {
 //     console.log(error);
 //   });
-//test PostModel
-const PostModel = require('./models/postModel');
-const init = async () => {
-  const AllPosts = await PostModel.find();
-  console.log('All Posts:', AllPosts);
-};
-init();
+
 // const swaggerUi = require('swagger-ui-express');
 // const swaggerDocument = require('./swagger-output.json');
 //捕捉程式重大錯誤 這個要放最前面
@@ -47,6 +44,7 @@ process.on('uncaughtException', (err) => {
 app.use(express.json());
 const imagesPath = path.join(__dirname, '..', 'client', 'public', 'images');
 console.log(imagesPath);
+app.use(express.static(path.join(__dirname, '..', 'client', 'public')));
 // express.static('public/Images')
 // app.use('/adminProducts', express.static('public/Images'));
 app.use((req, res, next) => {
@@ -63,17 +61,9 @@ app.use((req, res, next) => {
 // The function is expected to return a JSON response.
 
 // 将用户路由挂载到 /api/users 路径下
-// app.use('/api/users');
-// app.use('/api/users/member', usersMemberRoutes);
-app.get('/', (req, res) => {
-  res.status(200).json({
-    message: 'Welcome to socialPlatform API',
-  });
-});
-app.get('/s/:postContent', (req, res) => {
-  console.log(req.params);
-  res.status(200).json({ name: 'test' });
-});
+app.use('/users', userRoutes);
+app.use('/posts', postRoutes);
+
 // 404 找不到頁面 錯誤處理程序
 app.use((req, res, next) => {
   res.status(404).send("Sorry can't find that! 404 错误处理程序");
@@ -94,11 +84,3 @@ const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`socialPlatform's Server Started at  ${PORT}`);
 });
-
-//test mongodb connect
-// const requestListener = (req, res) => {
-//   console.log(req.url);
-//   res.end();
-// };
-// const server = http.createServer(requestListener);
-// server.listen(8080);
