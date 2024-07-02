@@ -1,27 +1,14 @@
-const dotenv = require('dotenv');
-dotenv.config({ path: './config.env' });
-// console.log(process.env);
-// console.log(process.env.MONGODB_CONNECT_URL);
 const express = require('express');
 const app = express();
 const path = require('path');
 const cors = require('cors');
+app.use(cors());
 
-const connectDB = require('./connectMongo');
+const connectDB = require('./connections/connectMongo');
 connectDB();
 
 const userRoutes = require('./routes/userRoutes');
 const postRoutes = require('./routes/postRoutes');
-//test model with mongodb
-const UserModel = require('./models/userModel');
-//use create
-// UserModel.create({ name: 'test8', phone: 823456789 })
-//   .then(() => {
-//     console.log('done');
-//   })
-//   .catch((error) => {
-//     console.log(error);
-//   });
 
 // const swaggerUi = require('swagger-ui-express');
 // const swaggerDocument = require('./swagger-output.json');
@@ -44,6 +31,7 @@ process.on('uncaughtException', (err) => {
 app.use(express.json());
 const imagesPath = path.join(__dirname, '..', 'client', 'public', 'images');
 console.log(imagesPath);
+
 app.use(express.static(path.join(__dirname, '..', 'client', 'public')));
 // express.static('public/Images')
 // app.use('/adminProducts', express.static('public/Images'));
@@ -80,7 +68,7 @@ process.on('unhandleRejection', (err, promise) => {
   console.error('uncaught Rejection!', promise, 'reason', err);
 });
 
-const PORT = process.env.PORT;
-app.listen(PORT, () => {
-  console.log(`socialPlatform's Server Started at  ${PORT}`);
-});
+// const PORT = process.env.PORT;
+// app.listen(PORT, () => {
+//   console.log(`socialPlatform's Server Started at  ${PORT}`);
+// });
