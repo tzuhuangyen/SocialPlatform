@@ -2,22 +2,31 @@ const PostModel = require('../models/postModel');
 
 const postControllers = {
   async getPosts(req, res) {
-    const AllPosts = PostModel.find();
-    res.status(200).json({
-      AllPosts,
-    });
-  },
-  async createPosts({ body, req, res }) {
     try {
-      console.log(req.body);
-      const newPost = await PostModel.create(req.body);
+      const AllPosts = await PostModel.find();
       res.status(200).json({
-        message: 'create post success',
-        posts: newPost,
+        AllPosts,
       });
     } catch (error) {
+      res.status(500).json({
+        message: 'get posts fail',
+        error: error.message,
+      });
+    }
+  },
+  async createPosts(req, res) {
+    try {
+      console.log('Request body:', req.body);
+      const newPost = await PostModel.create(req.body);
+      res.status(201).json({
+        message: 'create post success',
+        post: newPost,
+      });
+    } catch (error) {
+      console.error('Error creating post:', error);
       res.status(400).json({
         message: 'create post fail',
+        error: error.message,
       });
     }
   },

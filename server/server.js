@@ -1,3 +1,5 @@
+const dotenv = require('dotenv');
+dotenv.config({ path: './config.env' });
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -68,7 +70,7 @@ process.on('unhandleRejection', (err, promise) => {
   console.error('uncaught Rejection!', promise, 'reason', err);
 });
 
-// const PORT = process.env.PORT;
-// app.listen(PORT, () => {
-//   console.log(`socialPlatform's Server Started at  ${PORT}`);
-// });
+const PORT = process.env.PORT;
+app.listen(PORT, () => {
+  console.log(`socialPlatform's Server Started at  ${PORT}`);
+});
