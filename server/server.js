@@ -4,7 +4,6 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const cors = require('cors');
-app.use(cors());
 
 const connectDB = require('./connections/connectMongo');
 connectDB();
@@ -30,11 +29,12 @@ process.on('uncaughtException', (err) => {
 //   optionsSuccessStatus: 200,
 // };
 // app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
 const imagesPath = path.join(__dirname, '..', 'client', 'public', 'images');
 console.log(imagesPath);
 
-app.use(express.static(path.join(__dirname, '..', 'client', 'public')));
 // express.static('public/Images')
 // app.use('/adminProducts', express.static('public/Images'));
 app.use((req, res, next) => {
@@ -51,8 +51,8 @@ app.use((req, res, next) => {
 // The function is expected to return a JSON response.
 
 // 将用户路由挂载到 /api/users 路径下
-app.use('/users', userRoutes);
-app.use('/posts', postRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/posts', postRoutes);
 
 // 404 找不到頁面 錯誤處理程序
 app.use((req, res, next) => {
@@ -74,3 +74,5 @@ const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`socialPlatform's Server Started at  ${PORT}`);
 });
+
+// module.exports = app;

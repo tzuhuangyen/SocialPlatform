@@ -1,33 +1,24 @@
 const PostModel = require('../models/postModel');
+const handleSuccess = require('../service/handleSuccess');
+const handleError = require('../service/handleError');
 
 const postControllers = {
   async getPosts(req, res) {
     try {
       const AllPosts = await PostModel.find();
-      res.status(200).json({
-        AllPosts,
-      });
+      handleSuccess(res, AllPosts);
     } catch (error) {
-      res.status(500).json({
-        message: 'get posts fail',
-        error: error.message,
-      });
+      handleError(res, error);
     }
   },
   async createPosts(req, res) {
     try {
       console.log('Request body:', req.body);
       const newPost = await PostModel.create(req.body);
-      res.status(201).json({
-        message: 'create post success',
-        post: newPost,
-      });
+      handleSuccess(res, newPost);
     } catch (error) {
       console.error('Error creating post:', error);
-      res.status(400).json({
-        message: 'create post fail',
-        error: error.message,
-      });
+      handleError(res, error);
     }
   },
 };
