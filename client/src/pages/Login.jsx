@@ -40,7 +40,10 @@ const Login = (props) => {
             </div>
           </div>
         </div>
-      </Container>
+        <Link to='/postsWall' className='btn btn-primary'>
+          test to see posts wall
+        </Link>
+      </Container>{' '}
     </div>
   );
 };
