@@ -1,0 +1,56 @@
+body {
+  background-color: #ffffff;
+  font-family: 'Paytone One', 'Noto Sans TC', sans-serif;
+  font-weight: 400;
+}
+.image-container {
+  background-color: #ffffff; // 背景颜色
+  padding: 20px; // 根据需要调整内边距
+  border-radius: 10px; // 根据需要调整边框圆角
+
+  .login-image {
+    display: block;
+    max-width: 350px; // 确保图片不会超出容器
+    height: 340px; // 保持图片比例
+  }
+}
+.login-card {
+  max-width: 890px;
+
+  h1 {
+    font-size: 3.5rem;
+    color: #0b3d91; // MetaWall 字體顏色
+    font-weight: bold;
+  }
+
+  p {
+    color: #555;
+    font-weight: bold;
+  }
+
+  .form-control {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+
+  .btn-primary {
+    background-color: #0b3d91; // 按鈕顏色
+    border: none;
+    border-radius: 5px;
+  }
+  .submitBtn {
+    width: 100%;
+    box-shadow: -2px 2px 0px 0px #000400;
+  }
+  .btn-primary:hover {
+    background-color: #0948a8;
+  }
+
+  a {
+    color: #0b3d91; // 註冊連結顏色
+  }
+
+  a:hover {
+    color: #0948a8;
+  }
+}
