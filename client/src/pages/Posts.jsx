@@ -1,0 +1,109 @@
+import React from 'react';
+import { Container, Row, Col, Dropdown, Button, Form } from 'react-bootstrap';
+import { FaSearch, FaRegThumbsUp } from 'react-icons/fa';
+import { TiBell } from 'react-icons/ti';
+
+import user2x from '/image/user@2x.png';
+import petsloveCover from '/image/petslove-cover.png';
+import user62x from '/image/user6@2x.png';
+const PostsWall = () => {
+  return (
+    <>
+      <Container fluid='lg'>
+        <Row>
+          <Col lg={9}>
+            <div className='filters mb-2'>
+              {' '}
+              <div className='newestPost'>
+                {' '}
+                <Dropdown>
+                  <Dropdown.Toggle id='dropdown-basic'>
+                    Newest Posts
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu>
+                    <Dropdown.Item href='#/action-1'>Action</Dropdown.Item>
+                    <Dropdown.Item href='#/action-2'>
+                      Another action
+                    </Dropdown.Item>
+                    <Dropdown.Item href='#/action-3'>
+                      Something else
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              </div>
+              <div className='search d-flex justify-content-between align-items-center'>
+                <Form.Control
+                  type='text'
+                  placeholder='Search'
+                  className=' mr-sm-2'
+                />
+                <Button type='submit'>
+                  <FaSearch />
+                </Button>
+              </div>
+            </div>
+            <div className='postsWall'>
+              <div className='posts'>
+                <div className='post'>
+                  <div className='mb-2 d-flex align-items-center'>
+                    <img src={user2x} alt='userAvatar' className='me-3' />
+                    <div>
+                      <p className='userName'>Jay</p>
+                      <span className='fw-lighter'>2024/07/08</span>
+                    </div>
+                  </div>
+                  <div className='postContent mb-2'>test test</div>
+                  <div className='postImages'>
+                    <img src={petsloveCover} alt='' />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className='comments'>
+              <div className='mb-2 comment d-flex align-items-center'>
+                <img src={user62x} alt='' />
+                <div className='ms-2'>
+                  <div className='userName'>BoGi</div>
+                  <span>2024/07/09</span>
+                </div>
+              </div>
+              <div className='replayContent'>test test</div>
+            </div>
+          </Col>
+          <Col lg={3}>
+            <div className='sideBar'>
+              {' '}
+              <button className='mb-3' style={{ width: '100%' }}>
+                post your thought{' '}
+              </button>
+              <ul>
+                <li className='sideBar-List'>
+                  {' '}
+                  <img
+                    className='me-3'
+                    style={{ width: '50px' }}
+                    src={user2x}
+                    alt='user'
+                  />
+                  <div className='userName'>Jay</div>
+                </li>
+                <li className='sideBar-List'>
+                  <TiBell />
+                  Follow List
+                </li>
+                <li className='sideBar-List'>
+                  <FaRegThumbsUp />
+
+                  <div className='userName'>Likes</div>
+                </li>
+              </ul>
+            </div>
+          </Col>
+        </Row>
+      </Container>
+    </>
+  );
+};
+
+export default PostsWall;

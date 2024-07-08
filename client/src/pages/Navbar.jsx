@@ -12,7 +12,7 @@ const Navbar = (props) => {
   return (
     <div>
       {' '}
-      <Nav className='border-bottom border-dark'>
+      <Nav className='border-bottom border-dark mb-4'>
         <Container fluid='lg'>
           <Nav className=' d-flex justify-content-between '>
             <h1 className='logo'>MetaWall</h1>

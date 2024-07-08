@@ -1,11 +1,11 @@
 import React from 'react';
 import Navbar from './Navbar';
-import PostsWall from './PostsWall';
+import Posts from './Posts';
 const PostsWall = () => {
   return (
     <>
       <Navbar />
-      <PostsWall />
+      <Posts />
     </>
   );
 };
