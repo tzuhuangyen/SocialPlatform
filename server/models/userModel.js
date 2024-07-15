@@ -2,8 +2,15 @@ const mongoose = require('mongoose');
 // schema
 const userSchema = new mongoose.Schema(
   {
-    name: { type: String, required: [true, 'must be'] },
-    phone: Number,
+    name: { type: String, required: [true, 'enter your name'] },
+    email: {
+      type: String,
+      unique: true,
+      required: [true, 'enter your email'],
+      lowercase: true,
+      select: false, //不要顯示給前台用戶
+    },
+    photo: String,
     createdAt: {
       type: Date,
       default: Date.now,
