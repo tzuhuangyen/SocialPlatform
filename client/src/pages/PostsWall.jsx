@@ -5,6 +5,7 @@ const PostsWall = () => {
   return (
     <>
       <Navbar />
+
       <Posts />
     </>
   );
