@@ -56,6 +56,7 @@ app.use('/api/posts', postRoutes);
 app.use((req, res, next) => {
   res.status(404).send('404 not found pages');
 });
+// 上線環境錯誤處理程序
 const resErrorProd = (err, res) => {
   console.error(err.message);
   if (err.isOperational) {
@@ -71,6 +72,7 @@ const resErrorProd = (err, res) => {
     });
   }
 };
+//開發環境錯誤處理程序
 const resErrorDev = (err, res) => {
   res.status(err.statusCode || 500).json({
     status: err.status,
@@ -83,7 +85,6 @@ const resErrorDev = (err, res) => {
 app.use((err, req, res, next) => {
   console.log(err.name);
   console.error(err.stack);
-
   const statusCode = err.statusCode || 500;
   if (process.env.NODE_ENV === 'dev') {
     return resErrorDev(err, res);
@@ -98,7 +99,7 @@ app.use((err, req, res, next) => {
 });
 //未捕捉到 api 的catch
 process.on('unhandleRejection', (err, promise) => {
-  console.error('uncaught Rejection!', promise, 'reason', err);
+  console.error('Uncaught Rejection!', promise, 'Reason', err);
 });
 
 const PORT = process.env.PORT;

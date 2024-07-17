@@ -30,15 +30,25 @@ const postControllers = {
         getAllPosts[getAllPosts.length - 1].createdAt
       );
     }
+    res.status(200).json({
+      status: 'success',
+      results: getAllPosts.length,
+      data: {
+        posts: getAllPosts,
+      },
+    });
   },
   async createPosts(req, res, next) {
     console.log('Request body:', req.body);
-    const { content, user } = req.body;
+    const { content } = req.body; // 确保解构 req.body 中的 content
 
-    if (!content || !user) {
-      return next(appError(400, 'Content and user are required'));
+    if (!content) {
+      return next(appError(400, 'Content is required', next));
     }
-    const newPost = await PostModel.create(req.body);
+    const newPost = await PostModel.create({
+      content,
+      user: req.user._id, // 将当前用户的 ID 添加到新帖子中
+    });
     handleSuccess(res, newPost);
   },
 };

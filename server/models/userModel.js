@@ -11,6 +11,16 @@ const userSchema = new mongoose.Schema(
       select: false, //不要顯示給前台用戶
     },
     photo: String,
+    gender: {
+      type: String,
+      enum: ['male', 'female'],
+    },
+    password: {
+      type: String,
+      required: [true, 'enter your password'],
+      minlength: 5,
+      select: false, //不要顯示給前台用戶
+    },
     createdAt: {
       type: Date,
       default: Date.now,
@@ -19,6 +29,10 @@ const userSchema = new mongoose.Schema(
     updatedAt: {
       type: Date,
       default: Date.now,
+    },
+    role: {
+      type: String,
+      enum: ['user', 'admin'],
     },
   },
 

@@ -1,3 +1,4 @@
+//取代原本的try catch
 const handleErrorAsync = function handleErrorAsync(func) {
   return function (req, res, next) {
     func(req, res, next).catch(function (error) {
