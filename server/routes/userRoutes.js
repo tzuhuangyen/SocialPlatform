@@ -8,6 +8,8 @@ const bcrypt = require('bcrypt');
 const Validator = require('validator');
 const userModel = require('../models/userModel');
 const { generateJWT, isAuth } = require('../service/auth');
+const firebaseAdmin = require('../connections/firebase');
+const uploadControllers = require('../controllers/uploadControllers');
 //sign up
 router.post(
   '/sign_up',
@@ -93,6 +95,45 @@ router.post(
     });
     generateJWT(user, 200, res);
   })
+);
+
+//upload image
+router.post(
+  '/upload/image',
+  uploadControllers.single('file'),
+  function (req, res) {
+    const bucket = firebaseAdmin.storage().bucket();
+
+    // 取得上傳的檔案資訊
+    const file = req.file;
+    // 基於檔案的原始名稱建立一個 blob 物件
+    const blob = bucket.file(file.originalname);
+    // 建立一個可以寫入 blob 的物件
+    const blobStream = blob.createWriteStream();
+    // 監聽上傳狀態，當上傳完成時，會觸發 finish 事件
+    blobStream.on('finish', () => {
+      // 設定檔案的存取權限
+      const config = {
+        action: 'read', // 權限
+        expires: '12-31-2500', // 網址的有效期限
+      };
+      // 取得檔案的網址
+      blob.getSignedUrl(config, (err, imgUrl) => {
+        if (err) {
+          return res.status(500).send(err.message);
+        }
+        res.send({
+          imgUrl,
+        });
+      });
+    });
+    // 如果上傳過程中發生錯誤，會觸發 error 事件
+    blobStream.on('error', (err) => {
+      res.status(500).send(err.message);
+    });
+    // 將檔案的 buffer 寫入 blobStream
+    blobStream.end(file.buffer);
+  }
 );
 
 module.exports = router;
