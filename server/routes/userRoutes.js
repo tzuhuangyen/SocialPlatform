@@ -138,7 +138,9 @@ router.post(
     // 取得上傳的檔案資訊
     const file = req.file;
     // 基於檔案的原始名稱建立一個 blob 物件
-    const blob = bucket.file(file.originalname);
+    // const blob = bucket.file(file.originalname);
+    // 上傳圖片的時候，都會希望可以分類
+    const blob = bucket.file(`images/${file.originalname}`);
     // 建立一個可以寫入 blob 的物件
     const blobStream = blob.createWriteStream();
     // 監聽上傳狀態，當上傳完成時，會觸發 finish 事件
