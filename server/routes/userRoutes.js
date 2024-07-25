@@ -103,7 +103,13 @@ router.post(
   uploadControllers.single('file'),
   function (req, res) {
     const bucket = firebaseAdmin.storage().bucket();
-
+    bucket.getFiles((err, files) => {
+      if (err) {
+        console.error('Error getting files from bucket:', err);
+      } else {
+        console.log('Files in bucket:', files);
+      }
+    });
     // 取得上傳的檔案資訊
     const file = req.file;
     // 基於檔案的原始名稱建立一個 blob 物件
@@ -135,5 +141,20 @@ router.post(
     blobStream.end(file.buffer);
   }
 );
+router.delete('/delete/image', (req, res) => {
+  // 取得檔案名稱
+  const fileName = req.query.fileName;
+  // 取得檔案
+  const blob = bucket.file(fileName);
+  // 刪除檔案
+  blob
+    .delete()
+    .then(() => {
+      res.send('delete success');
+    })
+    .catch((err) => {
+      res.status(500).send(err.message);
+    });
+});
 
 module.exports = router;
