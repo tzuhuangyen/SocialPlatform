@@ -5,6 +5,7 @@ const appError = require('../service/appError');
 const handleErrorAsync = require('../service/handleErrorAsync');
 
 const upload = multer({
+  storage: multer.memoryStorage(),
   limits: {
     fileSize: 2 * 1024 * 1024,
   },
@@ -17,6 +18,6 @@ const upload = multer({
     }
     cb(null, true);
   },
-}).any();
+}).single('file');
 
 module.exports = upload;

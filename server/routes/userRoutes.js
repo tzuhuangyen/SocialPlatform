@@ -132,16 +132,16 @@ router.get(
 router.post(
   '/upload/image',
   // isAuth,
-  upload.single('file'),
+  upload,
   handleErrorAsync(async (req, res, next) => {
-    if (!req.file.length) {
+    if (!req.file) {
       return next(appError(400, 'please upload image', next));
     }
     //取得用戶上傳的第一個檔案
-    const file = req.file[0];
+    const file = req.file;
     //基於檔案的原始名稱建立一個blob物件
     const blob = bucket.file(
-      `images/${uuidv4()}.${file.originalname}.split('.)`
+      `images/${uuidv4()}.${file.originalname.split('.').pop()}`
     );
     // 建立一個可以寫入 blob 的物件
     const blobStream = blob.createWriteStream();
