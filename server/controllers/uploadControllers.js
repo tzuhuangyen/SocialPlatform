@@ -1,9 +1,22 @@
+//單純處理上傳圖片 middleware
 const multer = require('multer');
+const path = require('path');
+const appError = require('./appError');
+const handleErrorAsync = require('./asyncErrorHandler');
 
-const uploadControllers = multer({
+const upload = multer({
   limits: {
-    fileSize: 5 * 1024 * 1024, // 5MB
+    fileSize: 2 * 1024 * 1024,
   },
-});
+  fileFilter(req, file, cb) {
+    const ext = path.extname(file.originalname).toLowerCase();
+    if (ext !== '.jpg' && ext !== '.png' && ext !== '.jpeg') {
+      cb(
+        new Error('file format is not supported,only jpg, png, jpeg is allowed')
+      );
+    }
+    cb(null, true);
+  },
+}).any();
 
-module.exports = uploadControllers;
+module.exports = upload;
