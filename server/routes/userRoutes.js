@@ -129,46 +129,48 @@ router.get(
 );
 
 //upload image
-router.post('/upload/image', upload.single('file'), function (req, res) {
-  bucket.getFiles((err, files) => {
-    if (err) {
-      console.error('Error getting files from bucket:', err);
-    } else {
-      console.log('Files in bucket:', files);
+router.post(
+  '/upload/image',
+  // isAuth,
+  upload.single('file'),
+  handleErrorAsync(async (req, res, next) => {
+    if (!req.file.length) {
+      return next(appError(400, 'please upload image', next));
     }
-  });
-  // 取得上傳的檔案資訊
-  const file = req.file;
-  // 基於檔案的原始名稱建立一個 blob 物件
-  // const blob = bucket.file(file.originalname);
-  // 上傳圖片的時候，都會希望可以分類
-  const blob = bucket.file(`images/${file.originalname}`);
-  // 建立一個可以寫入 blob 的物件
-  const blobStream = blob.createWriteStream();
-  // 監聽上傳狀態，當上傳完成時，會觸發 finish 事件
-  blobStream.on('finish', () => {
-    // 設定檔案的存取權限
-    const config = {
-      action: 'read', // 權限
-      expires: '12-31-2500', // 網址的有效期限
-    };
-    // 取得檔案的網址
-    blob.getSignedUrl(config, (err, imgUrl) => {
-      if (err) {
-        return res.status(500).send(err.message);
-      }
-      res.send({
-        imgUrl,
+    //取得用戶上傳的第一個檔案
+    const file = req.file[0];
+    //基於檔案的原始名稱建立一個blob物件
+    const blob = bucket.file(
+      `images/${uuidv4()}.${file.originalname}.split('.)`
+    );
+    // 建立一個可以寫入 blob 的物件
+    const blobStream = blob.createWriteStream();
+    // 監聽上傳狀態，當上傳完成時，會觸發 finish 事件
+    blobStream.on('finish', () => {
+      // 設定檔案的存取權限
+      const config = {
+        action: 'read', // 權限
+        expires: '12-31-2500', // 網址的有效期限
+      };
+      // 取得檔案的網址
+      blob.getSignedUrl(config, (err, imgUrl) => {
+        if (err) {
+          return res.status(500).send(err.message);
+        }
+        res.send({
+          imgUrl,
+        });
       });
     });
-  });
-  // 如果上傳過程中發生錯誤，會觸發 error 事件
-  blobStream.on('error', (err) => {
-    res.status(500).send(err.message);
-  });
-  // 將檔案的 buffer 寫入 blobStream
-  blobStream.end(file.buffer);
-});
+    // 如果上傳過程中發生錯誤，會觸發 error 事件
+    blobStream.on('error', (err) => {
+      res.status(500).send(err.message);
+    });
+    // 將檔案的 buffer 寫入 blobStream
+    blobStream.end(file.buffer);
+  })
+);
+
 router.delete('/delete/image', (req, res) => {
   // 取得檔案名稱
   const fileName = req.query.fileName;
