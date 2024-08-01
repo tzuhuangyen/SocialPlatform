@@ -1,7 +1,7 @@
 //單純處理上傳圖片 middleware
 const multer = require('multer');
 const path = require('path');
-const appError = require('./appError');
+const appError = require('../service/appError');
 const handleErrorAsync = require('./asyncErrorHandler');
 
 const upload = multer({
