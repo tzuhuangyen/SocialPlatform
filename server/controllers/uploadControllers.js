@@ -2,7 +2,7 @@
 const multer = require('multer');
 const path = require('path');
 const appError = require('../service/appError');
-const handleErrorAsync = require('./asyncErrorHandler');
+const handleErrorAsync = require('../service/asyncErrorHandler');
 
 const upload = multer({
   limits: {
