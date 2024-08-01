@@ -11,9 +11,9 @@ const Validator = require('validator');
 const userModel = require('../models/userModel');
 const { generateJWT, isAuth } = require('../service/auth');
 //upload image
-const sizeOf = require('image-size');
+// const sizeOf = require('image-size');
 const upload = require('../controllers/uploadControllers');
-const { ImgurClient } = require('imgur');
+// const { ImgurClient } = require('imgur');
 const { v4: uuidv4 } = require('uuid');
 const firebaseAdmin = require('../connections/firebase');
 const uploadControllers = require('../controllers/uploadControllers');
