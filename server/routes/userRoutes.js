@@ -10,6 +10,8 @@ const userModel = require('../models/userModel');
 const { generateJWT, isAuth } = require('../service/auth');
 const firebaseAdmin = require('../connections/firebase');
 const uploadControllers = require('../controllers/uploadControllers');
+const bucket = firebaseAdmin.storage().bucket();
+
 //sign up
 router.post(
   '/sign_up',
@@ -98,36 +100,33 @@ router.post(
 );
 //image
 //get image
-router.get('/image', function (req, res) {
-  // 取得檔案列表
-  bucket.getFiles().then((data) => {
-    
-    return data[0]
-  }).then((files) => {
-    const fileList = [];
-    for (const file of files) {
-      // 取得檔案的簽署 URL
-      const fileUrl = await file.getSignedUrl({
-        action: 'read',
-        expires: '03-09-2491'
-      });
-      fileList.push({
-        fileName: file.name,
-        imgUrl: fileUrl
-      });
-    }
+router.get(
+  '/image',
+  handleErrorAsync(async (req, res) => {
+    const [files] = await bucket.getFiles();
+
+    const fileList = await Promise.all(
+      files.map(async (file) => {
+        const [fileUrl] = await file.getSignedUrl({
+          action: 'read',
+          expires: '03-09-2491',
+        });
+        return {
+          fileName: file.name,
+          imgUrl: fileUrl,
+        };
+      })
+    );
+
     res.send(fileList);
-  }).catch((err) => {
-    res.status(500).send('取得檔案列表失敗');
-  });
-});
+  })
+);
 
 //upload image
 router.post(
   '/upload/image',
   uploadControllers.single('file'),
   function (req, res) {
-    const bucket = firebaseAdmin.storage().bucket();
     bucket.getFiles((err, files) => {
       if (err) {
         console.error('Error getting files from bucket:', err);
