@@ -13,7 +13,7 @@ const Navbar = (props) => {
             <h1 className='logo'>MetaWall</h1>
             <div className='member d-flex align-items-center'>
               <NavDropdown title='Dropdown' id='nav-dropdown'>
-                <NavDropdown.Item href='#/postwall'>postwall</NavDropdown.Item>
+                <NavDropdown.Item href='#/MetaWall'>MetaWall</NavDropdown.Item>
                 <NavDropdown.Item href='#/profile'>profile</NavDropdown.Item>
                 <NavDropdown.Item href='#/logout'>logout</NavDropdown.Item>
                 <NavDropdown.Divider />

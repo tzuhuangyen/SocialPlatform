@@ -1,7 +1,7 @@
 import React from 'react';
 import { Col, Dropdown } from 'react-bootstrap';
 
-const Filters = (props) => {
+const NewestPostFilter = (props) => {
   return (
     <Col lg={3}>
       <div>
@@ -29,4 +29,4 @@ const Filters = (props) => {
   );
 };
 
-export default Filters;
+export default NewestPostFilter;

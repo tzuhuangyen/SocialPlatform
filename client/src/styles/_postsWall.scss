@@ -21,6 +21,10 @@
     align-items: center;
     margin-bottom: 22px;
     position: relative;
+    &:hover {
+      color: #03438d;
+      cursor: pointer;
+    }
   }
   .icon-circle {
     width: 50px;

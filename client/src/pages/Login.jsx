@@ -41,8 +41,8 @@ const Login = (props) => {
             </div>
           </div>
         </div>
-        <Link to='/postsWall' className='btn btn-primary'>
-          test to see posts wall
+        <Link to='/MetaWall' className='btn btn-primary'>
+          test to see posts MetaWall
         </Link>
       </Container>{' '}
     </div>
