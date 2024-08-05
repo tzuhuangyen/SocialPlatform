@@ -162,3 +162,36 @@
   height: 100%;
   object-fit: cover;
 }
+
+.emptyPost {
+  border: 1px solid #000000;
+  border-radius: 8px;
+  padding-top: 16px;
+  box-shadow: 0px 3px 0px #000400;
+  margin-bottom: 16px;
+  position: relative; //bottom底線
+  .dot-container {
+    display: flex;
+    gap: 10px;
+    padding: 0; //bottom底線
+    margin: 0; //bottom底線
+    border-bottom: 1px solid #000000;
+    .dot {
+      height: 9px;
+      width: 9px;
+      border-radius: 50%;
+      border: black 1px solid;
+      margin-bottom: 16px;
+    }
+    .dot1 {
+      background-color: #de4b63;
+      margin-left: 16px;
+    }
+    .dot2 {
+      background-color: #faa722;
+    }
+    .dot3 {
+      background-color: #83c51d;
+    }
+  }
+}

@@ -1,9 +1,8 @@
 import React from 'react';
+
 import { Container, Nav, NavDropdown } from 'react-bootstrap';
 
-import userAvatar from '/image/user.png';
-
-const Navbar = (props) => {
+const TestDropdown = () => {
   return (
     <div>
       {' '}
@@ -26,4 +25,4 @@ const Navbar = (props) => {
   );
 };
 
-export default Navbar;
+export default TestDropdown;

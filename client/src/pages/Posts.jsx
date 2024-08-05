@@ -7,7 +7,7 @@ import user2x from '/image/user@2x.png';
 import petsloveCover from '/image/petslove-cover.png';
 import user62x from '/image/user6@2x.png';
 import Filters from './Filters';
-
+import EmptyPostWall from './EmptyPostwall';
 const PostsWall = () => {
   return (
     <>
@@ -17,7 +17,6 @@ const PostsWall = () => {
             <Row className='filters mb-2'>
               <Filters />
               <Col lg={9}>
-                <EmptyPostWall />
                 <div
                   className='search d-flex justify-content-between align-items-center'
                   style={{ border: '1px solid #000400' }}
@@ -41,7 +40,7 @@ const PostsWall = () => {
                 </div>
               </Col>
             </Row>
-
+            <EmptyPostWall />
             <div className='postsWall'>
               <div className='posts'>
                 <div className='post'>
@@ -78,16 +77,7 @@ const PostsWall = () => {
           <Col lg={3}>
             <div className='sideBar'>
               {' '}
-              <button
-                className='mb-3'
-                style={{
-                  width: '100%',
-                  backgroundColor: '#03438D',
-                  boxShadow: '-2px 2px 0px #000400',
-                }}
-              >
-                post your thought{' '}
-              </button>
+              <button className='mb-3 sideBarBtn'>post your thought </button>
               <ul>
                 <li className='sideBar-List'>
                   {' '}

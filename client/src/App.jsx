@@ -1,7 +1,7 @@
 import './App.css';
 import './assets/styles/all.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 import '../src/styles/all.scss';
 
 import React, { useState } from 'react';
