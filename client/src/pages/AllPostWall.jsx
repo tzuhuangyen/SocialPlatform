@@ -12,43 +12,46 @@ import user6 from '/image/user6.png';
 import PostWallTemplate from './PostWallTemplate';
 import PostWithComment from './PostWallComment';
 import { MdOutlineModeComment } from 'react-icons/md';
-
+import NewestPostFilter from './NewestPostFilter';
+import SearchBar from './SearchBar';
 const AllPosts = () => {
   return (
-    <Container fluid='lg' className='p-0'>
-      <Row>
-        <Col>
-          <PostWallTemplate />
-
-          <div className='comments'>
-            <div className='mb-2 comment d-flex align-items-center'>
-              <img src={user62x} alt='' className='me-3' />
-              <div className='ms-2'>
-                <div className='userName'>BoGi</div>
-                <span>2024/07/09</span>
-              </div>
-            </div>
-            <div className='replayContent'>Im going to be a Great King</div>
-            <ul className='d-flex align-items-center mt-4'>
-              <li className='likes me-2'>
-                <a href='#'>
-                  <BiLike />
-                  10
-                </a>
-              </li>
-              <li className='comment'>
-                <a href='#'>
-                  <MdOutlineModeComment size={18} />
-                  Comment
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <PostWithComment />
-        </Col>
+    <>
+      <Row className='mb-3'>
+        {' '}
+        <NewestPostFilter />
+        <SearchBar />
       </Row>
-    </Container>
+
+      <PostWallTemplate />
+
+      <div className='otherUserPost comments '>
+        <div className='mb-2 comment d-flex align-items-center'>
+          <img src={user62x} alt='' className='me-3' />
+          <div className='ms-2'>
+            <div className='userName'>BoGi</div>
+            <span>2024/07/09</span>
+          </div>
+        </div>
+        <div className='replayContent'>Im going to be a Great King</div>
+        <ul className='d-flex align-items-center mt-4'>
+          <li className='likes me-2'>
+            <a href='#'>
+              <BiLike />
+              10
+            </a>
+          </li>
+          <li className='comment'>
+            <a href='#'>
+              <MdOutlineModeComment size={18} />
+              Comment
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <PostWithComment />
+    </>
   );
 };
 

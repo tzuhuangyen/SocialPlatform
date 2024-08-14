@@ -12,6 +12,9 @@ import MetaWall from './pages/MetaWall';
 import FollowList from './pages/FollowerList';
 import ArticlesLike from './pages/ArticlesLike';
 import AllPostWall from './pages/AllPostWall';
+import UserPostWall from './pages/UserPostWall';
+import PostNewPost from './pages/PostNewPost';
+
 function App() {
   const [count, setCount] = useState(0);
 
@@ -21,10 +24,10 @@ function App() {
       <Route path='/signup' element={<SignUp />} />
       <Route path='/metaWall' element={<MetaWall />}>
         <Route index element={<AllPostWall />} />
-        <Route path='userPostWall' element={<FollowList />} />
+        <Route path='userPostWall' element={<UserPostWall />} />
         <Route path='followList' element={<FollowList />} />
-
         <Route path='articlesLikes' element={<ArticlesLike />} />
+        <Route path='postNewPost' element={<PostNewPost />} />
       </Route>{' '}
     </Routes>
   );

@@ -10,7 +10,9 @@ const SideBar = () => {
       {' '}
       <div className='sideBar'>
         {' '}
-        <button className='mb-3 sideBarBtn'>post your thought </button>
+        <button className='mb-3 sideBarBtn'>
+          <Link to='postNewContext'>what's in your mind</Link>{' '}
+        </button>
         <ul>
           <li className='sideBar-List'>
             {' '}

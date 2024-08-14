@@ -1,0 +1,28 @@
+.followListsTitle {
+  border: 2px solid #000400;
+  opacity: 1;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  padding-top: 18px;
+  padding-bottom: 18px;
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.user-info {
+  display: flex; /* 使用 flexbox 布局 */
+  align-items: center;
+}
+.user-image {
+  width: 100%; /* Image takes full width */
+}
+
+.tracking-info {
+  display: flex;
+  justify-content: space-between;
+  width: 100%; /* 确保 `.tracking-info` 占满父元素宽度 */
+}
+
+.tracking-info span {
+  flex-grow: 1; /* 每个 span 都会尽可能占据剩余空间 */
+  min-width: 80px; /* 每个 span 的最小宽度 */
+}
