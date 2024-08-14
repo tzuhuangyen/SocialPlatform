@@ -1,9 +1,9 @@
 const handleSuccess = require('../service/handleSuccess');
 const handleError = require('../service/handleError');
+const appError = require('../service/appError');
 const PostModel = require('../models/postModel');
 const UserModel = require('../models/userModel');
-const appError = require('../service/appError');
-
+const CommentModel = require('../models/commentsModal');
 const postControllers = {
   async getPosts(req, res, next) {
     //新的訊息在前面timeSort == 'asc'
@@ -18,6 +18,10 @@ const postControllers = {
       .populate({
         path: 'user',
         select: 'name photo ',
+      })
+      .populate({
+        path: 'comments',
+        select: 'comment user',
       })
       .sort(timeSort)
       .select('+createdAt');
@@ -50,6 +54,26 @@ const postControllers = {
       user: req.user._id, // 将当前用户的 ID 添加到新帖子中
     });
     handleSuccess(res, newPost);
+  },
+  async replyComment(req, res, next) {
+    const user = req.user ? req.user._id : null;
+    const post = req.params.id;
+    const { comment } = req.body;
+
+    if (!user) {
+      return next(appError(401, 'Unauthorized: User not found', next));
+    }
+    const newComment = await CommentModel.create({
+      post,
+      user,
+      comment,
+    });
+    res.status(200).json({
+      status: 'success',
+      data: {
+        comment: newComment,
+      },
+    });
   },
 };
 module.exports = postControllers;

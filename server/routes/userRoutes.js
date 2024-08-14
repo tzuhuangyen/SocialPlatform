@@ -17,8 +17,11 @@ const upload = require('../controllers/uploadControllers');
 const { v4: uuidv4 } = require('uuid');
 const firebaseAdmin = require('../connections/firebase');
 const uploadControllers = require('../controllers/uploadControllers');
+const PostModel = require('../models/postModel');
+const UserModel = require('../models/userModel');
 const bucket = firebaseAdmin.storage().bucket();
-//sign up
+//app.use('/api/users', userRoutes);
+//sign up v
 router.post(
   '/sign_up',
   handleErrorAsync(async (req, res, next) => {
@@ -55,7 +58,7 @@ router.post(
   })
 );
 
-//login
+//login v
 router.post(
   '/login',
   handleErrorAsync(async (req, res, next) => {
@@ -72,7 +75,7 @@ router.post(
   })
 );
 
-//get users
+//get users v
 router.get(
   '/profile',
   isAuth,
@@ -85,7 +88,7 @@ router.get(
   })
 );
 
-//update password
+//update password v
 router.post(
   '/updatePassword',
   isAuth,
@@ -104,8 +107,9 @@ router.post(
     generateJWT(user, 200, res);
   })
 );
+
 //image
-//get image
+//get image v
 router.get(
   '/image',
   handleErrorAsync(async (req, res) => {
@@ -128,7 +132,7 @@ router.get(
   })
 );
 
-//upload image
+//upload image v
 router.post(
   '/upload/image',
   // isAuth,
@@ -170,7 +174,7 @@ router.post(
     blobStream.end(file.buffer);
   })
 );
-
+//delete image
 router.delete('/delete/image', (req, res) => {
   // 取得檔案名稱
   const fileName = req.query.fileName;
@@ -186,5 +190,81 @@ router.delete('/delete/image', (req, res) => {
       res.status(500).send(err.message);
     });
 });
+//get likes list
+router.get(
+  'getLikeList',
+  isAuth,
+  handleErrorAsync(async (req, res, next) => {
+    const likeList = await PostModel.find({
+      likes: { $in: req.user.id },
+    }).populate({
+      path: 'user',
+      select: 'name photo _id',
+    });
+    res.status(200).json({
+      status: 'success',
+      likeList,
+    });
+  })
+);
+//follower v
+router.post(
+  '/:id/follow',
+  isAuth,
+  handleErrorAsync(async (req, res, next) => {
+    if (req.params.id === req.user.id) {
+      return next(appError(400, 'you can not follow yourself', next));
+    }
+    await UserModel.updateOne(
+      {
+        _id: req.user.id,
+        'following.user': { $ne: req.params.id },
+      },
+      {
+        $addToSet: { following: { user: req.params.id } },
+      }
+    );
+    await UserModel.updateOne(
+      {
+        _id: req.params.id,
+        'followers.user': { $ne: req.user.id },
+      },
+      {
+        $addToSet: { followers: { user: req.user.id } },
+      }
+    );
+    res.status(200).json({
+      status: 'success',
+      message: 'follow success',
+    });
+  })
+);
+//cancel following
+router.delete(
+  '/:id/unfollow',
+  isAuth,
+  handleErrorAsync(async (req, res, next) => {
+    if (req.params.id === req.user.id) {
+      return next(appError(400, 'you can not unfollow yourself', next));
+    }
+    await UserModel.updateOne(
+      {
+        _id: req.user.id,
+      },
+      { $pull: { following: { user: req.params.id } } }
+    );
+    await UserModel.updateOne(
+      {
+        _id: req.params.id,
+      },
+      { $pull: { followers: { user: req.user.id } } }
+    );
+
+    res.status(200).json({
+      status: 'success',
+      message: 'unfollow success',
+    });
+  })
+);
 
 module.exports = router;

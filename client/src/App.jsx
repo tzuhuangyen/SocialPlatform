@@ -9,10 +9,9 @@ import { Routes, Route } from 'react-router-dom';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import MetaWall from './pages/MetaWall';
-
 import FollowList from './pages/FollowerList';
-import Posts from './pages/Posts';
 import ArticlesLike from './pages/ArticlesLike';
+import AllPostWall from './pages/AllPostWall';
 function App() {
   const [count, setCount] = useState(0);
 
@@ -20,9 +19,11 @@ function App() {
     <Routes>
       <Route path='/' element={<Login />} />
       <Route path='/signup' element={<SignUp />} />
-      <Route path='/MetaWall' element={<MetaWall />}>
-        <Route path='posts' element={<Posts />} />
+      <Route path='/metaWall' element={<MetaWall />}>
+        <Route index element={<AllPostWall />} />
+        <Route path='userPostWall' element={<FollowList />} />
         <Route path='followList' element={<FollowList />} />
+
         <Route path='articlesLikes' element={<ArticlesLike />} />
       </Route>{' '}
     </Routes>

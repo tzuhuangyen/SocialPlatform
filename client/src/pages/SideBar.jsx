@@ -14,7 +14,7 @@ const SideBar = () => {
         <ul>
           <li className='sideBar-List'>
             {' '}
-            <Link to='posts'>
+            <Link to='userPostWall' className='d-flex align-items-center'>
               <img
                 className='me-3'
                 style={{ width: '50px' }}
@@ -25,7 +25,7 @@ const SideBar = () => {
             </Link>
           </li>
           <li className='sideBar-List '>
-            <Link to='followList'>
+            <Link to='followList' className='d-flex align-items-center'>
               <p className='icon-circle'>
                 <TiBell size={30} />
               </p>
@@ -33,7 +33,7 @@ const SideBar = () => {
             </Link>
           </li>
           <li className='sideBar-List'>
-            <Link to='articlesLikes'>
+            <Link to='articlesLikes' className='d-flex align-items-center'>
               <p className='icon-circle'>
                 <FaRegThumbsUp size={25} />
               </p>

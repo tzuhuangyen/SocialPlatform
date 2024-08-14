@@ -5,7 +5,7 @@ import Navbar from './Navbar';
 import NewestPostFilter from './NewestPostFilter';
 import SearchBar from './SearchBar';
 import SideBar from './SideBar';
-
+import AllPostWall from './AllPostWall';
 const MetaWall = () => {
   return (
     <>
@@ -17,7 +17,6 @@ const MetaWall = () => {
               <NewestPostFilter />
               <SearchBar />
             </Row>
-
             <Outlet />
           </Col>
           <Col lg={3}>

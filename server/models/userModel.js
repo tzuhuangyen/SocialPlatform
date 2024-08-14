@@ -30,10 +30,31 @@ const userSchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
     },
-    role: {
-      type: String,
-      enum: ['user', 'admin'],
-    },
+    // role: {
+    //   type: String,
+    //   enum: ['user', 'admin'],
+    // },
+    followers: [
+      {
+        user: {
+          type: mongoose.Schema.ObjectId,
+          ref: 'User',
+        },
+        createdAt: {
+          type: Date,
+          default: Date.now,
+        },
+      },
+    ],
+    following: [
+      {
+        user: { type: mongoose.Schema.ObjectId, ref: 'User' },
+        createdAt: {
+          type: Date,
+          default: Date.now,
+        },
+      },
+    ],
   },
 
   { versionKey: false }
