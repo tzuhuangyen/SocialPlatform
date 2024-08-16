@@ -3,50 +3,41 @@
   padding: 32px 24px;
   display: flex;
   flex-direction: column;
-  .sideBarBtn {
-    width: 100%;
-    background-color: #03438d;
-    box-shadow: -2px 2px 0px #000400;
-    &:hover {
-      background-color: #eec32a;
-      cursor: pointer;
-    }
-  }
+}
+.sideBarBtn {
+  width: 100%;
+  background-color: $primary;
+  border-radius: 8px;
+  border: 2px solid #000400;
+  padding-top: 18px;
+  padding-bottom: 18px;
+  box-shadow: -2px 2px 0px #000400;
 
-  ul {
-    display: flex;
-    flex-direction: column;
-  }
-  .sideBar-List {
-    margin-bottom: 22px;
-    position: relative;
-    &:hover {
-      color: #03438d;
-      cursor: pointer;
-    }
-  }
-  .icon-circle {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: #e2edfa;
-    margin-right: 10px;
-    line-height: 40px;
-    text-align: center;
+  color: #e2edfa;
+  &:hover {
+    cursor: pointer;
 
-    position: relative; /* Make it a container for the icon */
+    background-color: #eec32a;
+    transition: 0.3s;
+    opacity: 0.6;
   }
-  &::before {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 10px;
-    left: 20px;
-    background-color: inherit; /* Inherit background color from .icon-circle */
-    border-radius: inherit; /* Inherit border-radius from .icon-circle */
-  }
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+}
+
+.icon-circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid #000400;
+  background-color: #e2edfa;
+  margin-right: 10px;
+  line-height: 40px;
+  text-align: center;
+  position: relative; /* Make it a container for the icon */
 }
 
 .filters {

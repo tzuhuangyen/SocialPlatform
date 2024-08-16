@@ -50,98 +50,10 @@
   right: 0;
 }
 
-//index-type
-.type-card-hover {
-  &:hover {
-    cursor: pointer;
-  }
-}
-// more顯示
-// &::after {
-//   content: 'test';
-//   position: absolute;
-//   font-size: 36px;
-//   font-weight: 900;
-//   color: $primary;
-//   display: flex;
-//   top: 0;
-//   right: 0;
-//   bottom: 0;
-//   left: 0;
-//   background-color: black;
-//   opacity: 0.7;
-//   justify-content: center;
-//   align-items: center;
-// }
-//   }
-// }
-
-.review-card-hover {
-  &:hover {
-    position: relative;
-
-    transition-timing-function: ease-in;
-    // more顯示
-    &::after {
-      content: 'MORE';
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      background-color: $secondary;
-      opacity: 0.5;
-      color: rgb(131, 19, 19);
-      font-size: 24px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 50%;
-    }
-  }
-}
-
-.quickView-hover {
-  &:hover {
-    position: relative;
-    transition: 0.3s;
-
-    // 遮罩顯示
-    &::after {
-      content: '';
-      position: absolute;
-      display: flex;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      background-color: black;
-      opacity: 0.3;
-      justify-content: center;
-      align-items: center;
-    }
-    // 按鈕顯示
-    .quickViewBtn {
-      display: block !important;
-      bottom: 0px;
-      left: 25%;
-      z-index: 2;
-    }
-  }
-}
-.-img-top {
-  height: 200px;
-  object-fit: cover;
-}
 .table-img {
   width: 75px;
   height: 75px;
   object-fit: cover;
-}
-.deleteBtn {
-  background: transparent;
-  color: $secondary;
-  padding: 0;
 }
 
 //admin update image for ProductTable

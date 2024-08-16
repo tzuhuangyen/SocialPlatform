@@ -1,13 +1,15 @@
 .followListsTitle {
-  border: 2px solid #000400;
-  opacity: 1;
-  background: #ffffff 0% 0% no-repeat padding-box;
-  padding-top: 18px;
-  padding-bottom: 18px;
   text-align: center;
   margin-bottom: 18px;
+  padding-top: 18px;
+  padding-bottom: 18px;
+  opacity: 1;
+  border: 2px solid #000; /* 设置边框颜色和宽度 */
+  box-shadow: -5px 5px 0px 2px #ffffff, 10px 10px 8px rgba(0, 0, 0, 0.2);
+  padding: 10px; /* 给内容增加一些内边距，让边框和阴影更明显 */
+  background-color: #fff; /* 设置背景颜色以确保阴影效果清晰可见 */
+  border-radius: 5px; /* 可选：设置圆角边框，使效果更柔和 */
 }
-
 .user-info {
   display: flex; /* 使用 flexbox 布局 */
   align-items: center;

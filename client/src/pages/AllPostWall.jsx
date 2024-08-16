@@ -1,19 +1,15 @@
 import React from 'react';
-import { Container, Row, Col, Dropdown, Button, Form } from 'react-bootstrap';
-import { FaSearch, FaRegThumbsUp } from 'react-icons/fa';
-import { TiBell } from 'react-icons/ti';
-import { Link, Outlet } from 'react-router-dom';
-import { BiLike } from 'react-icons/bi';
+import { Row } from 'react-bootstrap';
 
-import user2x from '/image/user@2x.png';
-import petsloveCover from '/image/petslove-cover.png';
 import user62x from '/image/user6@2x.png';
-import user6 from '/image/user6.png';
 import PostWallTemplate from './PostWallTemplate';
 import PostWithComment from './PostWallComment';
-import { MdOutlineModeComment } from 'react-icons/md';
 import NewestPostFilter from './NewestPostFilter';
 import SearchBar from './SearchBar';
+
+import { BiLike } from 'react-icons/bi';
+import { MdOutlineModeComment } from 'react-icons/md';
+
 const AllPosts = () => {
   return (
     <>

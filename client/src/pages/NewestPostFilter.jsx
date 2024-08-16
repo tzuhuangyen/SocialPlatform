@@ -9,14 +9,13 @@ const NewestPostFilter = (props) => {
         <Dropdown.Toggle
           id='dropdown-basic'
           style={{
-            backgroundColor: '#ffffff',
-            color: '#333',
+            color: 'black',
             borderRadius: '2px',
+            backgroundColor: 'white',
           }}
         >
           Newest Posts
         </Dropdown.Toggle>
-
         <Dropdown.Menu>
           <Dropdown.Item href='#/action-1'>Action</Dropdown.Item>
           <Dropdown.Item href='#/action-2'>Another action</Dropdown.Item>

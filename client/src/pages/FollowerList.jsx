@@ -3,7 +3,7 @@ import user62x from '/image/user6@2x.png';
 
 const FollowLists = () => {
   return (
-    <div>
+    <>
       <div className='followListsTitle'>FollowLists</div>
       <ul className='follow comments'>
         <li className=' mb-2 d-flex align-items-center'>
@@ -21,7 +21,7 @@ const FollowLists = () => {
           </div>
         </li>
       </ul>
-    </div>
+    </>
   );
 };
 

@@ -1,10 +1,9 @@
 import React from 'react';
-import { Container, Row, Col, Dropdown, Button } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import { Outlet } from 'react-router-dom';
 import Navbar from './Navbar';
-
 import SideBar from './SideBar';
-import AllPostWall from './AllPostWall';
+
 const MetaWall = () => {
   return (
     <>
