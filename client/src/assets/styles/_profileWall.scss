@@ -1,0 +1,67 @@
+.profileWall {
+  border: 1px solid #000000;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0px 3px 0px #000400;
+  margin-bottom: 16px;
+  /* 使内容在容器中居中 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  .updateImg {
+    button {
+      background-color: #000400;
+      padding: 4px 24px;
+      color: #e2edfa;
+      font-size: 16px;
+      width: 200px;
+    }
+  }
+  button {
+    background-color: #eec32a;
+    width: 50%;
+
+    border-radius: 8px;
+    border: 2px solid #000400;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    box-shadow: -2px 2px 0px #000400;
+    color: #000400;
+    font-weight: bold;
+  }
+}
+
+input {
+  width: 330px;
+}
+.changeGender {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* 将项目左对齐 */
+}
+.changeGender label {
+  margin-bottom: 8px; /* 与输入框的距离 */
+}
+.genderOptions {
+  width: 300px;
+  display: flex;
+  justify-content: start;
+}
+//password tab
+#justify-tab-example {
+  display: flex !important; /* 使用 flexbox 布局 */
+  flex-direction: row !important;
+  justify-content: space-start; /* 在容器中均匀分布 */
+}
+#justify-tab-example li {
+  border-radius: 8px 8px 0px 0px;
+}
+/* 覆盖默认的 Tab 标题颜色 */
+.nav-tabs .nav-link {
+  color: #000000 !important; /* 默认颜色 */
+}
+.nav-tabs .nav-link.active {
+  color: #e2edfa !important; /* 激活时的颜色 */
+  background-color: #000000 !important; /* 可选：激活时的背景颜色 */
+}
