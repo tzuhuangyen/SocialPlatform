@@ -41,11 +41,11 @@ const Posts = () => {
             <div className='postImages'>
               <img src={nft} alt='' />
             </div>
-            <div className='likes'>
+            <div className='likes mt-2 d-flex align-items-center'>
               <p>
                 <BiLike />
               </p>
-              <span className='ms-1'>be the first one likes this post</span>
+              <p className='ms-1'>be the first one likes this post</p>
             </div>
             <div className='comment d-flex mt-3'>
               <img

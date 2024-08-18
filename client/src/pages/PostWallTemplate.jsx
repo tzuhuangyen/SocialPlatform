@@ -28,7 +28,7 @@ const PostWallTemplate = () => {
           <div className='postImages'>
             <img src={petsloveCover} alt='' />
           </div>
-          <ul className='d-flex align-items-center mt-4'>
+          <ul className='d-flex flex-row ps-0 mt-4'>
             <li className='likes me-2'>
               <a href='#'>
                 <BiLike />

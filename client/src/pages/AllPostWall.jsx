@@ -21,7 +21,7 @@ const AllPosts = () => {
 
       <PostWallTemplate />
 
-      <div className='otherUserPost comments '>
+      <div className='otherUserPost comments mb-4 '>
         <div className='mb-2 comment d-flex align-items-center'>
           <img src={user62x} alt='' className='me-3' />
           <div className='ms-2'>
@@ -30,15 +30,15 @@ const AllPosts = () => {
           </div>
         </div>
         <div className='replayContent'>Im going to be a Great King</div>
-        <ul className='d-flex align-items-center mt-4'>
+        <ul className='d-flex flex-row ps-0 mt-4 '>
           <li className='likes me-2'>
-            <a href='#'>
+            <a href='#' style={{ textDecoration: 'none', color: 'black' }}>
               <BiLike />
-              10
+              Like
             </a>
           </li>
-          <li className='comment'>
-            <a href='#'>
+          <li className='comment '>
+            <a href='#' style={{ textDecoration: 'none', color: 'black' }}>
               <MdOutlineModeComment size={18} />
               Comment
             </a>

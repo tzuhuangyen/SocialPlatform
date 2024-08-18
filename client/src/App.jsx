@@ -11,7 +11,6 @@ import MetaWall from './pages/MetaWall';
 import FollowList from './pages/FollowerList';
 import ArticlesLike from './pages/ArticlesLike';
 import AllPostWall from './pages/AllPostWall';
-import PostNewContext from './pages/PostNewContext';
 import PostNewPost from './pages/PostNewPost';
 import UserPostWall from './pages/UserPostWall';
 function App() {
@@ -24,7 +23,7 @@ function App() {
       <Route path='/metaWall' element={<MetaWall />}>
         <Route index element={<AllPostWall />} />
         <Route path='profile' element={<Profile />} />
-        <Route path='postNewContext' element={<PostNewContext />} />
+        <Route path='postNewPost' element={<PostNewPost />} />
         <Route path='userPostWall' element={<UserPostWall />} />
         <Route path='followList' element={<FollowList />} />
         <Route path='articlesLikes' element={<ArticlesLike />} />

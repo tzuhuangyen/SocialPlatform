@@ -32,6 +32,7 @@ const Login = (props) => {
                   placeholder='Password'
                 />
               </div>
+              <p style={{ color: '#F57375' }}>帳號或密碼錯誤，請重新輸入！</p>
               <button type='submit' className='btn btn-primary submitBtn'>
                 Log in
               </button>

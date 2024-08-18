@@ -6,11 +6,11 @@ import { FaRegThumbsUp } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 const SideBar = () => {
   return (
-    <div>
+    <>
       <div className='sideBar'>
         <button className='mb-3 sideBarBtn'>
           <Link
-            to='postNewContext'
+            to='PostNewPost'
             style={{
               color: 'white',
               textDecoration: 'none',
@@ -19,8 +19,8 @@ const SideBar = () => {
             what's in your mind
           </Link>{' '}
         </button>
-        <ul>
-          <li className='sideBar-List mb-4'>
+        <ul className='ps-0'>
+          <li className='sideBar-List mb-3'>
             {' '}
             <Link
               to='userPostWall'
@@ -61,7 +61,7 @@ const SideBar = () => {
               className='d-flex align-items-center'
             >
               <p className='icon-circle'>
-                <FaRegThumbsUp size={30} />
+                <FaRegThumbsUp size={23} />
               </p>
 
               <p className='userName fw-bold' style={{ color: 'black' }}>
@@ -71,7 +71,7 @@ const SideBar = () => {
           </li>
         </ul>
       </div>
-    </div>
+    </>
   );
 };
 

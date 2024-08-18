@@ -18,32 +18,15 @@ const Profile = () => {
               <img src={user62x} alt='' className='mb-3' />
               <button type='submit'>update picture</button>
             </div>
-            <div className='changeName mb-3'>
+            <div className='changeName mb-3 d-flex flex-column'>
+              <label htmlFor=''>nickName</label>
               <input
                 type='text'
                 placeholder='change your nickName?'
                 className=' p-3'
               />
             </div>
-            <div className='changeGender mb-4 '>
-              <label htmlFor=''>gender</label>
-              <div className='genderOptions'>
-                <input
-                  type='radio'
-                  name='gender'
-                  value='male'
-                  className='me-2 '
-                />
-                Male
-                <input
-                  type='radio'
-                  name='gender'
-                  value='female'
-                  className='me-2 ms-2'
-                />
-                Female
-              </div>
-            </div>
+
             <button type='submit'>Submit</button>
           </div>
         </Tab>

@@ -67,6 +67,10 @@ ul {
     display: flex;
     align-items: center;
   }
+  a {
+    text-decoration: none;
+    color: #000000;
+  }
   .otherReplieds {
     li {
       background-color: #efece7;
@@ -79,7 +83,7 @@ ul {
   border-radius: 8px;
   padding: 24px;
   box-shadow: 0px 3px 0px #000400;
-  margin-bottom: 16px;
+
   img {
     width: 45px;
     height: 45px;

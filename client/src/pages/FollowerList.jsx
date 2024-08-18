@@ -4,7 +4,7 @@ import user62x from '/image/user6@2x.png';
 const FollowLists = () => {
   return (
     <>
-      <div className='followListsTitle'>FollowLists</div>
+      <div className='followListsTitle'>Follow Lists</div>
       <ul className='follow comments'>
         <li className=' mb-2 d-flex align-items-center'>
           <div className='user-info'>
