@@ -8,7 +8,7 @@ const mongoPath =
   process.env.MONGODB_CONNECT_URL.replace(
     '<password>',
     process.env.MONGODB_CONNECT_PASSWORD
-  ) || 'mongodb://localhost:27017/socialPlatform';
+  ) || 'mongodb://localhost:27017/SocialPlatform';
 console.log(mongoPath);
 //backend port 使用 mongoose.connect() 连接到 MongoDB 数据库
 const connectDB = async () => {
