@@ -18,6 +18,6 @@ const upload = multer({
     }
     cb(null, true);
   },
-}).single('file');
+}).single('file'); //any?
 
 module.exports = upload;

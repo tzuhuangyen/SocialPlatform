@@ -1,5 +1,6 @@
 const dotenv = require('dotenv');
 dotenv.config({ path: './config.env' });
+
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -9,7 +10,6 @@ connectDB();
 
 const userRoutes = require('./routes/userRoutes');
 const postRoutes = require('./routes/postRoutes');
-
 // const swaggerUi = require('swagger-ui-express');
 // const swaggerDocument = require('./swagger-output.json');
 //捕捉程式重大錯誤 這個要放最前面
@@ -106,5 +106,3 @@ const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`socialPlatform's Server Started at  ${PORT}`);
 });
-
-// module.exports = app;

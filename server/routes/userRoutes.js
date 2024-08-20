@@ -25,9 +25,9 @@ const bucket = firebaseAdmin.storage().bucket();
 router.post(
   '/sign_up',
   handleErrorAsync(async (req, res, next) => {
-    let { email, password, confirmPassword, name } = req.body;
+    let { email, password, confirmPassword, nickname } = req.body;
     //check all inputs are not empty
-    if (!email || !password || !confirmPassword || !name) {
+    if (!email || !password || !confirmPassword || !nickname) {
       return next(appError(400, 'input can not be empty', next));
     }
     //check password and confirm password are the same
@@ -49,16 +49,17 @@ router.post(
 
     //bcrypt password
     password = await bcrypt.hash(req.body.password, 12);
-    const newUser = await userModel.create({
+    // 创建新用户
+    const newUser = await UserModel.create({
       email,
       password,
-      name,
+      nickname,
     });
     generateJWT(newUser, 201, res);
   })
 );
 
-//login v
+//login v / sign in
 router.post(
   '/login',
   handleErrorAsync(async (req, res, next) => {
@@ -74,20 +75,6 @@ router.post(
     generateJWT(user, 200, res);
   })
 );
-
-//get users v
-router.get(
-  '/profile',
-  isAuth,
-  handleErrorAsync(async (req, res, next) => {
-    const users = await userModel.find();
-    res.status(200).json({
-      status: 'success',
-      user: req.user,
-    });
-  })
-);
-
 //update password v
 router.post(
   '/updatePassword',
@@ -107,7 +94,20 @@ router.post(
     generateJWT(user, 200, res);
   })
 );
-
+//get users v
+router.get(
+  '/profile',
+  isAuth,
+  handleErrorAsync(async (req, res, next) => {
+    const users = await userModel.find();
+    res.status(200).json({
+      status: 'success',
+      user: req.user,
+    });
+  })
+);
+//PATCH：{url}/users/profile: 更新個人資料
+router.patch('/profile');
 //image
 //get image v
 router.get(
@@ -190,7 +190,8 @@ router.delete('/delete/image', (req, res) => {
       res.status(500).send(err.message);
     });
 });
-//get likes list
+
+//get likes list取得個人按讚列表v
 router.get(
   'getLikeList',
   isAuth,
@@ -207,7 +208,25 @@ router.get(
     });
   })
 );
-//follower v
+//get followers list取得個人追蹤名單
+router.get(
+  '/followers',
+  isAuth,
+  handleErrorAsync(async (req, res, next) => {
+    const followers = await UserModel.find({
+      _id: req.user.id,
+    }).populate({
+      path: 'followers.user',
+      select: 'name photo _id',
+    });
+    res.status(200).json({
+      status: 'success',
+      followers: followers[0].followers,
+    });
+  })
+);
+
+//follower v 取得個人追蹤名單v
 router.post(
   '/:id/follow',
   isAuth,
@@ -239,7 +258,7 @@ router.post(
     });
   })
 );
-//cancel following
+//unFollowing 取消追蹤朋友v
 router.delete(
   '/:id/unfollow',
   isAuth,
