@@ -2,4 +2,4 @@
 
 [Social website page](https://tzuhuangyen.github.io/SocialPlatform/)
 This is a MERN project
-CRUD the post, such as Facebook
+CRUD the post, such as. social media
