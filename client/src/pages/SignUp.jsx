@@ -1,9 +1,59 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import loginBanner from '/image/loginBanner.jpg';
+import axios from 'axios';
+const backendUrl = `${import.meta.env.VITE_BACKEND_URL}`;
+// console.log('Backend URL:', backendUrl);
+import { showSignUpAlert, showSignUpErrorAlert } from '../swal';
+
+// 1. 前端: 发送注册请求
 const SignUp = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    nickname: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData((preState) => ({
+      ...preState,
+      [id]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { nickname, email, password, confirmPassword } = formData;
+    try {
+      const response = await axios.post(`${backendUrl}/api/users/sign_up`, {
+        nickname,
+        email,
+        password,
+        confirmPassword,
+      });
+      console.log('Registration successful:', response.data);
+      showSignUpAlert(nickname);
+      navigateWithDelay('/');
+    } catch (error) {
+      handleSignUpError(error);
+    }
+  };
+  const navigateWithDelay = (path, delay = 500) => {
+    setTimeout(() => navigate(path), delay);
+  };
+
+  const handleSignUpError = (error) => {
+    if (error.response) {
+      console.error('Registration failed:', error.response.data);
+      showSignUpErrorAlert(error.response.data.massage);
+    } else {
+      console.error('Registration failed:', error.message);
+    }
+  };
   return (
     <div>
       {' '}
@@ -19,14 +69,16 @@ const SignUp = () => {
             </div>
             <div className='form-container'>
               <h1 className='text-center'>MetaWall</h1>
-              <p className='text-center mb-4'>sign up</p>
-              <form>
+              <h2 className='text-center mb-4'>sign up</h2>
+              <form onSubmit={handleSubmit}>
                 <div className='form-group mb-3'>
                   <input
-                    type='nickname'
+                    type='text'
                     className='form-control'
                     id='nickname'
-                    placeholder='nickname'
+                    placeholder='Nickname'
+                    value={formData.nickname}
+                    onChange={handleChange}
                   />
                 </div>
                 <div className='form-group mb-3'>
@@ -35,6 +87,8 @@ const SignUp = () => {
                     className='form-control'
                     id='email'
                     placeholder='email'
+                    value={formData.email}
+                    onChange={handleChange}
                   />
                 </div>
                 <div className='form-group mb-3'>
@@ -43,6 +97,18 @@ const SignUp = () => {
                     className='form-control'
                     id='password'
                     placeholder='Password'
+                    value={formData.password}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className='form-group mb-3'>
+                  <input
+                    type='password'
+                    className='form-control'
+                    id='confirmPassword'
+                    placeholder='confirmPassword'
+                    value={formData.confirmPassword}
+                    onChange={handleChange}
                   />
                 </div>
                 <button type='submit' className='btn btn-primary submitBtn'>
