@@ -21,7 +21,7 @@ const PostModel = require('../models/postModel');
 const UserModel = require('../models/userModel');
 const bucket = firebaseAdmin.storage().bucket();
 //app.use('/api/users', userRoutes);
-//sign up v
+//v sign up v
 router.post(
   '/sign_up',
   handleErrorAsync(async (req, res, next) => {
@@ -58,8 +58,7 @@ router.post(
     generateJWT(newUser, 201, res);
   })
 );
-
-//login v / sign in
+//v login  / sign inv
 router.post(
   '/login',
   handleErrorAsync(async (req, res, next) => {
@@ -75,7 +74,7 @@ router.post(
     generateJWT(user, 200, res);
   })
 );
-//update password v
+//v update password v
 router.post(
   '/updatePassword',
   isAuth,
@@ -86,7 +85,7 @@ router.post(
         appError(400, 'password and confirmPassword are not the same', next)
       );
     }
-    newPassword = await bcrypt.hash(password, 12);
+    const newPassword = await bcrypt.hash(password, 12);
 
     const user = await userModel.findByIdAndUpdate(req.user.id, {
       password: newPassword,
@@ -94,20 +93,43 @@ router.post(
     generateJWT(user, 200, res);
   })
 );
-//get users v
+//v get user's profile v
 router.get(
   '/profile',
   isAuth,
   handleErrorAsync(async (req, res, next) => {
-    const users = await userModel.find();
+    const user = await userModel.findById(req.user.id).select('nickname email');
+    if (!user) {
+      return next(appError(404, 'User not found', next));
+    }
     res.status(200).json({
       status: 'success',
       user: req.user,
     });
   })
 );
-//PATCH：{url}/users/profile: 更新個人資料
-router.patch('/profile');
+//v PATCH：{url}/users/profile: 更新個人資料 v
+router.patch(
+  '/updateProfile',
+  isAuth,
+  handleErrorAsync(async (req, res, next) => {
+    const { nickname } = req.body;
+    const user = await userModel.findByIdAndUpdate(
+      req.user.id,
+      { nickname },
+      {
+        new: true,
+      }
+    );
+    if (!user) {
+      return next(appError(404, 'User not found', next));
+    }
+    res.status(200).json({
+      status: 'success',
+      user,
+    });
+  })
+);
 //image
 //get image v
 router.get(
@@ -191,7 +213,7 @@ router.delete('/delete/image', (req, res) => {
     });
 });
 
-//get likes list取得個人按讚列表v
+//get / likes list 取得個人按其他人讚列表v
 router.get(
   'getLikeList',
   isAuth,
@@ -208,7 +230,9 @@ router.get(
     });
   })
 );
-//get followers list取得個人追蹤名單
+//post / unlike
+//
+//get followers list取得個人追蹤他人名單
 router.get(
   '/followers',
   isAuth,
@@ -226,7 +250,7 @@ router.get(
   })
 );
 
-//follower v 取得個人追蹤名單v
+//follower 取消用戶追蹤他人v
 router.post(
   '/:id/follow',
   isAuth,

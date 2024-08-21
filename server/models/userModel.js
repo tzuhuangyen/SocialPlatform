@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema(
       unique: true,
       required: [true, 'enter your email'],
       lowercase: true,
-      select: false, //不要顯示給前台用戶
+      select: true, //false 不要顯示給前台用戶
     },
     photo: String,
     gender: {
