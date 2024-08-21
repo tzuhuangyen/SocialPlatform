@@ -1,9 +1,15 @@
 import React from 'react';
 import { Container, Nav, NavDropdown } from 'react-bootstrap';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link, useNavigate } from 'react-router-dom'; // Import Link from react-router-dom
 
 import user2x from '/image/user@2x.png';
 const Navbar = (props) => {
+  const navigate = useNavigate();
+  const logout = () => {
+    localStorage.removeItem('Token');
+    navigate('/');
+  };
+
   return (
     <div>
       {' '}
@@ -19,40 +25,34 @@ const Navbar = (props) => {
               />
 
               <NavDropdown title='Member' id='nav-dropdown'>
-                <NavDropdown.Item>
-                  {' '}
-                  <Link
-                    to='/metaWall'
-                    style={{
-                      textDecoration: 'none',
-                      color: 'black',
-                    }}
-                  >
-                    MetaWall
-                  </Link>
+                <NavDropdown.Item
+                  as={Link}
+                  to='/metaWall'
+                  style={{
+                    textDecoration: 'none',
+                    color: 'black',
+                  }}
+                >
+                  MetaWall
                 </NavDropdown.Item>
-                <NavDropdown.Item>
-                  {' '}
-                  <Link
-                    to='/metaWall/profile'
-                    style={{
-                      textDecoration: 'none',
-                      color: 'black',
-                    }}
-                  >
-                    profile
-                  </Link>
+                <NavDropdown.Item
+                  as={Link}
+                  to='/metaWall/profile'
+                  style={{
+                    textDecoration: 'none',
+                    color: 'black',
+                  }}
+                >
+                  profile
                 </NavDropdown.Item>
-                <NavDropdown.Item>
-                  <Link
-                    to='#/logout'
-                    style={{
-                      textDecoration: 'none',
-                      color: 'black',
-                    }}
-                  >
-                    logout
-                  </Link>
+                <NavDropdown.Item
+                  style={{
+                    textDecoration: 'none',
+                    color: 'black',
+                  }}
+                  onClick={logout}
+                >
+                  logout
                 </NavDropdown.Item>
                 {/* <NavDropdown.Divider /> */}
               </NavDropdown>

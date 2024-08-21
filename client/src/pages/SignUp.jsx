@@ -35,7 +35,12 @@ const SignUp = () => {
         password,
         confirmPassword,
       });
-      console.log('Registration successful:', response.data);
+      console.log('Registration successful:', response);
+      const { token } = response.data.user;
+      // 存储 token
+      localStorage.setItem('Token', token);
+      console.log('Token stored in localStorage:', token);
+
       showSignUpAlert(nickname);
       navigateWithDelay('/');
     } catch (error) {

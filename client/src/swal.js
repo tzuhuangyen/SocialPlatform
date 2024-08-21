@@ -78,6 +78,7 @@ export const showLoginAlert = (nickname) => {
   });
 };
 //showLoginErrorAlert: Invalid password
+// <style="color:white; text-decoration:none; display:inline-block; padding:10px 20px; background-color:#3085d6; border-radius:5px;">
 export const showLoginErrorAlert = (nickname) => {
   Swal.fire({
     position: 'center',
@@ -85,7 +86,7 @@ export const showLoginErrorAlert = (nickname) => {
     text: `try again?`,
     icon: 'error',
     html: `
-    <a href=/SocialPlatform/>" style="color:white; text-decoration:none; display:inline-block; padding:10px 20px; background-color:#3085d6; border-radius:5px;">Login again</a>
+    <a href=/> Login again</a>
   `,
 
     footer: `
@@ -142,6 +143,15 @@ export const showUpdatePswErrorAlert = () => {
     title: 'Error!',
     text: 'Your password has not been updated.',
     icon: 'error',
+    confirmButtonText: 'OK',
+  });
+};
+export const showUpdateNicknameAlert = () => {
+  // On success:
+  Swal.fire({
+    title: 'Success!',
+    text: 'Your Nickname has been updated.',
+    icon: 'success',
     confirmButtonText: 'OK',
   });
 };
