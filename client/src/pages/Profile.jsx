@@ -11,15 +11,19 @@ import axios from 'axios';
 
 const Profile = () => {
   const navigate = useNavigate();
+  //修改密碼 暱稱
   const [formData, setFormData] = useState({
     password: '',
     confirmPassword: '',
     nickname: '',
   });
+  // 修改email
   const [userData, setUserData] = useState({
     nickname: '',
     email: '',
   });
+  // 用于存储选择的文件
+  const [selectedFile, setSelectedFile] = useState(null);
   //登入後即可渲染profile
   useEffect(() => {
     (async () => {
@@ -38,7 +42,7 @@ const Profile = () => {
       }
     })();
   }, []);
-
+  //擷取input內的值
   const handleChange = (e) => {
     const { id, value } = e.target;
     setFormData((preState) => ({ ...preState, [id]: value }));
@@ -62,6 +66,41 @@ const Profile = () => {
     } catch (error) {
       console.error(
         'Error updating nickname:',
+        error.response?.data || error.message
+      );
+    }
+  };
+  //上傳照片
+  const handleFileChange = (e) => {
+    setSelectedFile(e.target.files[0]);
+  };
+  //提交上傳照片
+  const handleSubmitFile = async (e) => {
+    e.preventDefault();
+    if (!selectedFile) {
+      alert('upload failed');
+      return;
+    }
+    const token = localStorage.getItem('Token');
+    const formData = new FormData();
+    formData.append('file', selectedFile);
+
+    try {
+      const response = await axios.post(
+        `${backendUrl}/api/users/upload/image`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
+      console.log('File uploaded successfully:', response.data.imgUrl);
+      setUserData((prev) => ({ ...prev, photo: response.data.imgUrl }));
+    } catch (error) {
+      console.error(
+        'Error uploading image:',
         error.response?.data || error.message
       );
     }
@@ -106,8 +145,36 @@ const Profile = () => {
           <div className='profileWall'>
             <h2 className='text-center'>{userData.nickname} = (edge Jay)</h2>
             <div className='updateImg mb-4 d-flex flex-column align-items-center'>
-              <img src={user62x} alt='' className='mb-3' />
-              <button type='submit'>update picture</button>
+              <img
+                src={userData.photo || user62x}
+                alt='Profile'
+                className='mb-3'
+                style={{
+                  width: '100px',
+                  height: '100px',
+                  borderRadius: '50%',
+                  border: ' 2px solid #000400',
+                  opacity: '1',
+                  objectFit: 'contain',
+                }}
+              />
+              <form
+                onSubmit={handleSubmitFile}
+                encType='multipart/form-data'
+                className='d-flex flex-column align-items-center  justify-content-center'
+              >
+                <div className=' text-center ms-4'>
+                  {' '}
+                  <input
+                    type='file'
+                    accept='image/*'
+                    onChange={handleFileChange}
+                    className='mb-3'
+                  />
+                </div>
+
+                <button type='submit'>Update Picture</button>
+              </form>
             </div>
             <form
               onSubmit={handleSubmitNickname}
