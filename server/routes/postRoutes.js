@@ -3,13 +3,14 @@ const router = express.Router();
 const postControllers = require('../controllers/postControllers');
 const handleErrorAsync = require('../service/handleErrorAsync');
 const { isAuth } = require('../service/auth');
+const upload = require('../controllers/uploadControllers');
 //app.use('/api/posts', postRoutes);
 //[GET]取得所有貼文
 router.get('/', isAuth, handleErrorAsync(postControllers.getPosts));
 //[GET]取得單一貼文
 router.get('/{postID}', isAuth, handleErrorAsync(postControllers.getAPost));
 //[POST]用戶登入後新增貼文
-router.post('/', isAuth, handleErrorAsync(postControllers.createPosts));
+router.post('/', isAuth, upload, handleErrorAsync(postControllers.createPosts));
 // [POST]新增一則貼文的讚
 router.post(
   '/{postID}/like',

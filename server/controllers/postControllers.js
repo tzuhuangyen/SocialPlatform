@@ -4,6 +4,7 @@ const appError = require('../service/appError');
 const PostModel = require('../models/postModel');
 const UserModel = require('../models/userModel');
 const CommentModel = require('../models/commentsModal');
+
 const postControllers = {
   // 取得所有貼文v
   async getPosts(req, res, next) {
@@ -77,6 +78,7 @@ const postControllers = {
     const newPost = await PostModel.create({
       content,
       user: req.user._id, // 将当前用户的 ID 添加到新帖子中
+      image: req.file ? req.file.path : null,
     });
     handleSuccess(res, newPost);
   },
