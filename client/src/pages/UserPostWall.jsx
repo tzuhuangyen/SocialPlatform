@@ -1,10 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import user5 from '/image/user5.png';
 import SearchBar from './SearchBar';
 import NewestPostFilter from './NewestPostFilter';
 import PostWallTemplate from './PostWallTemplate';
 
 const UserPostWall = () => {
+  const [posts, setPosts] = useState([]);
+  const fetchPosts = async () => {
+    const token = localStorage.getItem('Token');
+    try {
+      const response = await axios.get(`${backendUrl}/aip/posts`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setPosts(response.data.posts);
+    } catch (error) {
+      console.error(
+        'Error fetching posts:',
+        error.response?.data || error.message
+      );
+    }
+  };
+  useEffect(() => {
+    fetchPosts();
+  }, []);
   return (
     <>
       <div>
